@@ -25,10 +25,10 @@
           <span>{{item.authName}}</span>
         </template>
         <!-- 二级菜单 -->
-        <el-menu-item :index='"/"+subitem.path' v-for="(subitem,subindex) in item.children" :key="subitem.id" @click="pathClick">
+        <el-menu-item :index='"/"+subitem.path' v-for="(subitem,subindex) in item.children" :key="subitem.id" @click="pathClick(`/${subitem.path}`)">
           <template slot="title">
           <i class="el-icon-menu"></i>
-          <span>{{item.authName}}</span>
+          <span>{{subitem.authName}}</span>
         </template>
         </el-menu-item>
       </el-submenu>
@@ -53,12 +53,14 @@ export default {
     return {
       AisdeList:[],
       iconList:['el-icon-s-custom','el-icon-box','el-icon-shopping-bag-1','el-icon-s-order','el-icon-data-analysis'],
-      submenuPath:'/users'
+      submenuPath:''
     }
   },
   created(){
     // 获取侧边栏数据
     this.getAsideMess()
+    // 将数据保存在session中管理它的状态
+    this.submenuPath = window.sessionStorage.getItem("activePath")
   },
   methods:{
     loginOut(){
@@ -76,9 +78,9 @@ export default {
       // console.log(this.AisdeList);
     },
     // 二级菜单点击高亮
-    pathClick(){
-      this.submenuPath = this.$route.path
-      console.log(this.$route.path);
+    pathClick(id){
+      window.sessionStorage.setItem("activePath",id)
+      this.submenuPath = id
     }
   },
 }
