@@ -7,6 +7,8 @@ import './plugins/element.js'
 import './assets/css/base.css'
 // 导入axios
 import axios from "axios"
+// 导入vue-tree
+import ZkTable from 'vue-table-with-tree-grid'
 // 配置请求的跟路径
 axios.defaults.baseURL = "https://lianghj.top:8888/api/private/v1/"
 // 设置请求拦截
@@ -16,6 +18,8 @@ axios.interceptors.request.use(config=>{
   return config
 })
 Vue.prototype.$http = axios
+
+Vue.component('tree-table',ZkTable)
 
 Vue.config.productionTip = false
 
