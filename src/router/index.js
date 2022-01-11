@@ -9,11 +9,13 @@ const Rights = () => import('../components/rights/Rights')
 const Roles = () => import('../components/roles/Roles')
 const Cate = () => import('../components/goods/Cate')
 const Params = () => import('../components/goods/Params')
+const List = () => import('../components/goods/List')
+const Add = () => import('../components//goods//Add')
 
 Vue.use(VueRouter)
 
 const routes = [
-  { path:'/',redirect:"/home"},
+  { path:'/',redirect:"/login"},
   { path:"/login",component:Login},
   { path:"/home",component:Home,
   redirect:'/welcome',
@@ -24,6 +26,8 @@ const routes = [
     { path:'/roles',component:Roles },
     { path:'/categories',component:Cate},
     { path:'/params',component:Params},
+    { path:'/goods',component:List},
+    { path:'/goods/add',component:Add},
   ]},
 ]
 
@@ -36,10 +40,10 @@ router.beforeEach((to,from,next)=>{
   // from代表从哪个路径跳转而来
   //next代表直接放放行
   // 如果访问登录页面直接放行
-  // if(to.path === '/login') return next()
+  if(to.path === '/login') return next()
   // 查看用户有没token有token放行没toke跳回登录页
-  // const tokenStr = window.sessionStorage.token
-  // if(!tokenStr) return next('/login')
+  const tokenStr = window.sessionStorage.token
+  if(!tokenStr) return next('/login')
   next()
 })
 

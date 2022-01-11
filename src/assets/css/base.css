@@ -13,3 +13,12 @@ body,html,#app{
 .el-cascader-menu{
   height: 300px;
 }
+.el-steps{
+  margin-top: 15px;
+}
+.el-steps_title{
+  font-size: 13px;
+}
+.ql-editor{
+  min-height: 300px;
+}
